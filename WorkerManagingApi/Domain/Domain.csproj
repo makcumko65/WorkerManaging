@@ -8,9 +8,11 @@
     <Folder Include="Common\" />
     <Folder Include="DomainModels\" />
     <Folder Include="DTOs\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Entities\" />
     <Folder Include="Enums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
   </ItemGroup>
 
 </Project>
