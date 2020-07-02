@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(WorkerContext))]
-    [Migration("20200630161635_init")]
+    [Migration("20200702150735_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,22 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Address");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("102b566b-ba1f-404c-b2df-e2cde39ade09"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Lviv"
+                        },
+                        new
+                        {
+                            Id = new Guid("5b1c2b4d-48c7-402a-80c3-cc796ad49c6b"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Lutsk"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -71,6 +87,29 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d173e20d-159e-4127-9ce9-b0ac2564ad97"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Plumbing work"
+                        },
+                        new
+                        {
+                            Id = new Guid("40ff5488-fdab-45b5-bc3a-14302d59869a"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Construction works"
+                        },
+                        new
+                        {
+                            Id = new Guid("a64549d1-8879-4c1f-ac89-e123fe633ad6"),
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Laying parquet"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -81,7 +120,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("AddressId")
+                    b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -146,9 +185,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<Guid>("WorkerId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
@@ -162,6 +198,87 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "217e2ab9-d528-42d4-97c7-3e707122be9e",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "worker.managing@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            LockoutEnabled = false,
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NormalizedEmail = "WORKER.MANAGING@GMAIL.COM",
+                            NormalizedUserName = "WORKER.MANAGING@GMAIL.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1fed66f4-e1a7-43f3-b82d-a577fbf16cba",
+                            TwoFactorEnabled = false,
+                            UserName = "worker.managing@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "da2fd609-d754-4feb-8acd-c4f9ff13ba96",
+                            AccessFailedCount = 0,
+                            AddressId = new Guid("102b566b-ba1f-404c-b2df-e2cde39ade09"),
+                            ConcurrencyStamp = "145ca203-5823-44a1-b601-5e2f3e6ce8bb",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ivanov@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Ivan",
+                            LastName = "Ivanov",
+                            LockoutEnabled = false,
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NormalizedEmail = "IVANOV@GMAIL.COM",
+                            NormalizedUserName = "IVANOV@GMAIL.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "37f54886-0fa5-4b8e-9284-cc96f7030470",
+                            TwoFactorEnabled = false,
+                            UserName = "ivanov@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "2902b665-1190-4c70-9915-b9c2d7680450",
+                            AccessFailedCount = 0,
+                            AddressId = new Guid("5b1c2b4d-48c7-402a-80c3-cc796ad49c6b"),
+                            ConcurrencyStamp = "ecc05a7c-d879-454a-a9f2-fc296d2eb601",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "petrov@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Petro",
+                            LastName = "Petrov",
+                            LockoutEnabled = false,
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NormalizedEmail = "PETROV@GMAIL.COM",
+                            NormalizedUserName = "PETROV@GMAIL.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "278bf462-2426-4dd0-abe9-6b7c41377acd",
+                            TwoFactorEnabled = false,
+                            UserName = "petrov@gmail.com"
+                        },
+                        new
+                        {
+                            Id = "d8663e5e-7494-4f81-8739-6e0de1bea7ee",
+                            AccessFailedCount = 0,
+                            AddressId = new Guid("5b1c2b4d-48c7-402a-80c3-cc796ad49c6b"),
+                            ConcurrencyStamp = "9ac2a209-ead4-4197-bc2b-45293ed36ab3",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "ksenya@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Ksenya",
+                            LastName = "Ksenya",
+                            LockoutEnabled = false,
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            NormalizedEmail = "KSENYA@GMAIL.COM",
+                            NormalizedUserName = "KSENYA@GMAIL.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "09ead5c9-8794-4fca-893c-59cb89e08d54",
+                            TwoFactorEnabled = false,
+                            UserName = "ksenya@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Worker", b =>
@@ -187,6 +304,22 @@ namespace Infrastructure.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Worker");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "da2fd609-d754-4feb-8acd-c4f9ff13ba96",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Experience in plumbing repair for 2 years",
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = "2902b665-1190-4c70-9915-b9c2d7680450",
+                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Laying parquet, tile and so on",
+                            Modified = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.WorkerCategory", b =>
@@ -202,6 +335,23 @@ namespace Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("WorkerCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            WorkerId = "da2fd609-d754-4feb-8acd-c4f9ff13ba96",
+                            CategoryId = new Guid("d173e20d-159e-4127-9ce9-b0ac2564ad97")
+                        },
+                        new
+                        {
+                            WorkerId = "2902b665-1190-4c70-9915-b9c2d7680450",
+                            CategoryId = new Guid("40ff5488-fdab-45b5-bc3a-14302d59869a")
+                        },
+                        new
+                        {
+                            WorkerId = "2902b665-1190-4c70-9915-b9c2d7680450",
+                            CategoryId = new Guid("a64549d1-8879-4c1f-ac89-e123fe633ad6")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -229,6 +379,38 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "fcfa0659-1791-4caa-aa8d-81d85997d8dc",
+                            Name = "Owner"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "c99a385e-19fe-456c-ab8c-cff5346e09b4",
+                            Name = "Administrator"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "01b8d073-935e-4c1d-9172-46a5be89f10c",
+                            Name = "Manager"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            ConcurrencyStamp = "859c1a49-bc0f-4dd5-8a33-b4dc2fb1d4b5",
+                            Name = "Worker"
+                        },
+                        new
+                        {
+                            Id = "5",
+                            ConcurrencyStamp = "39f43c8c-4298-4b51-9291-5e3164464b3c",
+                            Name = "User"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -339,9 +521,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Address", "Adrress")
                         .WithMany("Users")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Worker", b =>

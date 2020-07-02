@@ -74,8 +74,7 @@ namespace Infrastructure.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
-                    AddressId = table.Column<Guid>(nullable: false),
-                    WorkerId = table.Column<Guid>(nullable: false),
+                    AddressId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     CreatedBy = table.Column<string>(nullable: true),
                     Modified = table.Column<DateTime>(nullable: false),
@@ -89,7 +88,7 @@ namespace Infrastructure.Migrations
                         column: x => x.AddressId,
                         principalTable: "Address",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,6 +242,82 @@ namespace Infrastructure.Migrations
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Address",
+                columns: new[] { "Id", "Created", "CreatedBy", "Modified", "ModifiedBy", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("102b566b-ba1f-404c-b2df-e2cde39ade09"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Lviv" },
+                    { new Guid("5b1c2b4d-48c7-402a-80c3-cc796ad49c6b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Lutsk" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "1", "fcfa0659-1791-4caa-aa8d-81d85997d8dc", "Owner", null },
+                    { "2", "c99a385e-19fe-456c-ab8c-cff5346e09b4", "Administrator", null },
+                    { "3", "01b8d073-935e-4c1d-9172-46a5be89f10c", "Manager", null },
+                    { "4", "859c1a49-bc0f-4dd5-8a33-b4dc2fb1d4b5", "Worker", null },
+                    { "5", "39f43c8c-4298-4b51-9291-5e3164464b3c", "User", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "AddressId", "ConcurrencyStamp", "Created", "CreatedBy", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "Modified", "ModifiedBy", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "1", 0, null, "217e2ab9-d528-42d4-97c7-3e707122be9e", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "worker.managing@gmail.com", true, "Admin", "Admin", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "WORKER.MANAGING@GMAIL.COM", "WORKER.MANAGING@GMAIL.COM", null, null, false, "1fed66f4-e1a7-43f3-b82d-a577fbf16cba", false, "worker.managing@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "Id", "Created", "CreatedBy", "Modified", "ModifiedBy", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("d173e20d-159e-4127-9ce9-b0ac2564ad97"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Plumbing work" },
+                    { new Guid("40ff5488-fdab-45b5-bc3a-14302d59869a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Construction works" },
+                    { new Guid("a64549d1-8879-4c1f-ac89-e123fe633ad6"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Laying parquet" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "AddressId", "ConcurrencyStamp", "Created", "CreatedBy", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "Modified", "ModifiedBy", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "da2fd609-d754-4feb-8acd-c4f9ff13ba96", 0, new Guid("102b566b-ba1f-404c-b2df-e2cde39ade09"), "145ca203-5823-44a1-b601-5e2f3e6ce8bb", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ivanov@gmail.com", true, "Ivan", "Ivanov", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "IVANOV@GMAIL.COM", "IVANOV@GMAIL.COM", null, null, false, "37f54886-0fa5-4b8e-9284-cc96f7030470", false, "ivanov@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "AddressId", "ConcurrencyStamp", "Created", "CreatedBy", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "Modified", "ModifiedBy", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "2902b665-1190-4c70-9915-b9c2d7680450", 0, new Guid("5b1c2b4d-48c7-402a-80c3-cc796ad49c6b"), "ecc05a7c-d879-454a-a9f2-fc296d2eb601", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "petrov@gmail.com", true, "Petro", "Petrov", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "PETROV@GMAIL.COM", "PETROV@GMAIL.COM", null, null, false, "278bf462-2426-4dd0-abe9-6b7c41377acd", false, "petrov@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "AddressId", "ConcurrencyStamp", "Created", "CreatedBy", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "Modified", "ModifiedBy", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "d8663e5e-7494-4f81-8739-6e0de1bea7ee", 0, new Guid("5b1c2b4d-48c7-402a-80c3-cc796ad49c6b"), "9ac2a209-ead4-4197-bc2b-45293ed36ab3", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ksenya@gmail.com", true, "Ksenya", "Ksenya", false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "KSENYA@GMAIL.COM", "KSENYA@GMAIL.COM", null, null, false, "09ead5c9-8794-4fca-893c-59cb89e08d54", false, "ksenya@gmail.com" });
+
+            migrationBuilder.InsertData(
+                table: "Worker",
+                columns: new[] { "UserId", "Created", "CreatedBy", "Description", "Modified", "ModifiedBy" },
+                values: new object[] { "da2fd609-d754-4feb-8acd-c4f9ff13ba96", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Experience in plumbing repair for 2 years", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null });
+
+            migrationBuilder.InsertData(
+                table: "Worker",
+                columns: new[] { "UserId", "Created", "CreatedBy", "Description", "Modified", "ModifiedBy" },
+                values: new object[] { "2902b665-1190-4c70-9915-b9c2d7680450", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Laying parquet, tile and so on", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null });
+
+            migrationBuilder.InsertData(
+                table: "WorkerCategory",
+                columns: new[] { "WorkerId", "CategoryId" },
+                values: new object[] { "da2fd609-d754-4feb-8acd-c4f9ff13ba96", new Guid("d173e20d-159e-4127-9ce9-b0ac2564ad97") });
+
+            migrationBuilder.InsertData(
+                table: "WorkerCategory",
+                columns: new[] { "WorkerId", "CategoryId" },
+                values: new object[] { "2902b665-1190-4c70-9915-b9c2d7680450", new Guid("40ff5488-fdab-45b5-bc3a-14302d59869a") });
+
+            migrationBuilder.InsertData(
+                table: "WorkerCategory",
+                columns: new[] { "WorkerId", "CategoryId" },
+                values: new object[] { "2902b665-1190-4c70-9915-b9c2d7680450", new Guid("a64549d1-8879-4c1f-ac89-e123fe633ad6") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
