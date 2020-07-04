@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Worker.Commands.CreateWorker;
+using Application.Worker.Queries.GetAllWorkers;
+using Domain.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +20,14 @@ namespace Api.Controllers
         public WorkerController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<WorkerDTO>>> GetAllWorkers()
+        {
+            var result = await _mediator.Send(new GetAllWorkersQuery());
+
+            return Ok(result);
         }
 
         [HttpPost]
