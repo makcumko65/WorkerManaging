@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Common.Mapper;
+using Domain.Entities;
+using System;
 
 namespace Domain.DTOs
 {

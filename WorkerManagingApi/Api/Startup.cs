@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Application;
+using Domain;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Infrastructure;
@@ -34,13 +36,23 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddInfrastructure();
+            services.AddDomain();
+            services.AddApplication();
+
             services.AddDbContext<WorkerContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DataBaseConnectionString"));
             });
 
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<WorkerContext>()
-                                                      .AddDefaultTokenProviders();
+            services.AddIdentity<User, IdentityRole>(
+                  options =>
+                  {
+                      options.User.RequireUniqueEmail = true;
+                      options.Password.RequireNonAlphanumeric = false;
+                  })
+                    .AddEntityFrameworkStores<WorkerContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddSwaggerGen(c =>
             {
@@ -58,7 +70,10 @@ namespace Api
             var assembly = AppDomain.CurrentDomain.Load("Application");
             services.AddMediatR(assembly);
 
-            services.AddInfrastructure();
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
         }
 
